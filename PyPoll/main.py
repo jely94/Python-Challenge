@@ -40,11 +40,11 @@ with open(election_data) as csvfile:
     #Adds the percentage calculation to vote_percent list and formating
     for votes in num_votes:
         percentage = (votes/total_votes) * 100
-        #percentage = round(percentage)
+        
         percentage = "%.2f%%" % percentage
         vote_percent.append(percentage)
     
-    #Determine the winning candidate
+    #Determine the winning candidate by finding the index of the most votes
     winner = max(num_votes)
     index = num_votes.index(winner)
     winning_candidate = candidates[index]
@@ -64,22 +64,24 @@ print(f"And The Winner Is: {winning_candidate}")
 print("--------------------------")
 
 
-#Output data to .txt file
-output = open("output.txt", "w")
+#Output data to .txt file and put in analysis folder
+output_path = os.path.join("Analysis", "Election Analysis.txt")
+with open(output_path, 'w') as txtfile:
 
-line1 = "Election Results"
-line2 = "--------------------------"
-line3 = str(f"Total Votes Cast: {str(total_votes)}")
-line4 = str("--------------------------")
-output.write('{}\n{}\n{}\n{}\n'.format(line1, line2, line3, line4))
+    txtfile.write("Here Are The Election Results")
+    txtfile.write("--------------------------")
+    txtfile.write(str(f"Total Votes Cast: {str(total_votes)}"))
+    txtfile.write(str("--------------------------"))
 
-#From each list print out the candidate, number of votes, and percentage of total votes for each candidate
-for i in range(len(candidates)):
-    line5 = str(f"{candidates[i]}: {str(num_votes[i])} ({str(vote_percent[i])})")
-    output.write('{}\n'.format(line5))
+    #Print out each candidate, number of votes, and percentage of total votes for each candidate
+    txtfile.write(str(f"{candidates[0]}: {str(num_votes[0])} ({str(vote_percent[0])})"))
+    txtfile.write(str(f"{candidates[1]}: {str(num_votes[1])} ({str(vote_percent[1])})"))
+    txtfile.write(str(f"{candidates[2]}: {str(num_votes[2])} ({str(vote_percent[2])})"))
+    txtfile.write(str(f"{candidates[3]}: {str(num_votes[3])} ({str(vote_percent[3])})"))
 
-line6 = "--------------------------"
-line7 = str(f"Winner: {winning_candidate}")
-line8 = "--------------------------"
+    #Print out the winner
+    txtfile.write("--------------------------")
+    txtfile.write(str(f"And The Winner Is: {winning_candidate}"))
+    txtfile.write("--------------------------")
 
-output.write('{}\n{}\n{}\n'.format(line5, line6, line7))
+
