@@ -40,7 +40,6 @@ with open(election_data) as csvfile:
     #Adds the percentage calculation to vote_percent list and formating
     for votes in num_votes:
         percentage = (votes/total_votes) * 100
-        
         percentage = "%.2f%%" % percentage
         vote_percent.append(percentage)
     
